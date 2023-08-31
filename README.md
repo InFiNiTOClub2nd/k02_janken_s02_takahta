@@ -1,0 +1,1 @@
+# k02_janken_s02_takahta

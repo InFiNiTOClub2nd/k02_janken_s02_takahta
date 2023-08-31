@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>じゃんけんゲーム</title>
+</head>
+<body>
+    <div class="container">
+        <h1>じゃんけんゲーム</h1>
+        <div class="choices">
+            <button class="choice" id="rock">グー</button>
+            <button class="choice" id="paper">パー</button>
+            <button class="choice" id="scissors">チョキ</button>
+        </div>
+        <div class="result">
+            <p id="result-text">じゃんけん...</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+
+    <script>
+        // じゃんけんの選択肢
+const choices = ["rock", "paper", "scissors"];
+
+// プレイヤーの選択
+const buttons = document.querySelectorAll(".choice");
+buttons.forEach((button) => {
+    button.addEventListener("click", () => {
+        const playerChoice = button.id;
+        const computerChoice = getComputerChoice();
+        const result = getResult(playerChoice, computerChoice);
+        displayResult(playerChoice, computerChoice, result);
+    });
+});
+
+// コンピューターのランダムな選択
+function getComputerChoice() {
+    const randomIndex = Math.floor(Math.random() * choices.length);
+    return choices[randomIndex];
+}
+
+// じゃんけんの結果を判定
+function getResult(player, computer) {
+    if (player === computer) return "引き分け";
+    if ((player === "rock" && computer === "scissors") ||
+        (player === "paper" && computer === "rock") ||
+        (player === "scissors" && computer === "paper")) {
+        return "勝ち";
+    }
+    return "負け";
+}
+
+// 結果を表示
+function displayResult(player, computer, result) {
+    const resultText = document.getElementById("result-text");
+    resultText.textContent = `あなたの選択: ${player}, コンピューターの選択: ${computer}, 結果: ${result}`;
+}
+
+    </script>
+</body>
+</html>
